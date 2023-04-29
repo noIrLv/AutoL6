@@ -3,14 +3,15 @@ package test;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import data.DataHelper;
 import page.DashboardPage;
 import page.LoginPage;
-import ru.netology.web.data.DataHelper;
-
+import page.TransferPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static ru.netology.web.data.DataHelper.*;
+import static data.DataHelper.*;
+
 
 class MoneyTransferTest {
     LoginPage loginPage;
@@ -27,11 +28,13 @@ class MoneyTransferTest {
     }
 
     @Test
-    void shouldTransferAmount() {
+    void shouldTransferMoneyFromFirstToSecond() {
+
         var firstCardInfo = getFirstCardInfo();
         var secondCardInfo = getSecondCardInfo();
         var firstCardBalance = dashboardPage.getCardBalance(firstCardInfo);
         var secondCardBalance = dashboardPage.getCardBalance(secondCardInfo);
+        //int amount = 10000;
         var amount = generateValidAmount(firstCardBalance);
         var expectedBalanceFirstCard = firstCardBalance - amount;
         var expectedBalanceSecondCard = secondCardBalance + amount;
@@ -45,11 +48,12 @@ class MoneyTransferTest {
     }
 
     @Test
-    void shouldGetErrorIfAmountMoreBalance() {
+    void shouldTransferMoneyFromSecondToFirst() {
         var firstCardInfo = getFirstCardInfo();
         var secondCardInfo = getSecondCardInfo();
         var firstCardBalance = dashboardPage.getCardBalance(firstCardInfo);
         var secondCardBalance = dashboardPage.getCardBalance(secondCardInfo);
+        //int amount = 500;
         var amount = generateInvalidAmount(secondCardBalance);
         var transferPage = dashboardPage.selectCardToTransfer(firstCardInfo);
         transferPage.makeTransfer(String.valueOf(amount), secondCardInfo);
