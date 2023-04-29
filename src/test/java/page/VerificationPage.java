@@ -1,7 +1,7 @@
 package page;
 
 import com.codeborne.selenide.SelenideElement;
-import data.DataHelper;
+import ru.netology.web.data.DataHelper;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;

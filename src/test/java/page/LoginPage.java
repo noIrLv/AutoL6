@@ -1,9 +1,8 @@
 package page;
 
-import data.DataHelper;
+import ru.netology.web.data.DataHelper;
 
 import static com.codeborne.selenide.Selenide.$;
-
 
 public class LoginPage {
     public VerificationPage validLogin(DataHelper.AuthInfo info) {
